@@ -1,0 +1,12 @@
+#!/usr/bin/bash 
+set -euo pipefail
+IFS=$'\n\t'
+
+docker run --interactive --tty --rm \
+    --publish 8888:8888 \
+    --user root \
+    --env NB_UID="$(id -u)" \
+    --env NB_GID="$(id -g)" \
+    --volume "$(pwd)/work":/home/jovyan \
+    --volume "$(pwd)/../input":/home/jovyan/input \
+    quay.io/jupyter/scipy-notebook:2023-11-29
